@@ -63,6 +63,7 @@ function goPrev() {
         <button
           class="dashboard__page-btn"
           :disabled="store.currentPage === 0 || store.loading"
+          aria-label="Previous page"
           @click="goPrev"
         >
           <svg
@@ -89,6 +90,7 @@ function goPrev() {
         <button
           class="dashboard__page-btn"
           :disabled="!store.hasMore || store.loading"
+          aria-label="Next page"
           @click="goNext"
         >
           <svg

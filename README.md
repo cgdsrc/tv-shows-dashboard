@@ -1,7 +1,5 @@
 # ShowVault — TV Shows Dashboard
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/cf271c51-1ae0-49f7-8c8a-717cade049fe/deploy-status)](https://app.netlify.com/projects/showvault-tv/deploys)
-
 A TV show discovery app built with Vue 3 and TypeScript. It uses the free [TVMaze API](https://www.tvmaze.com/api) to display shows grouped by genre, allow searching, and show detailed information per show.
 
 ---
@@ -127,9 +125,51 @@ src/
 
 ---
 
+## Scaling Considerations
+
+### Folder Structure
+
+The current flat `components/` folder works at this scale, but as the feature set grows it becomes harder to navigate. The natural next step is a feature-based structure where each feature owns its views, components, and tests together:
+
+```
+src/
+├── features/
+│   ├── dashboard/
+│   │   ├── DashboardView.vue
+│   │   ├── GenreRow.vue
+│   │   └── __tests__/
+│   ├── show-detail/
+│   │   ├── ShowDetailView.vue
+│   │   ├── EpisodeCard.vue
+│   │   └── __tests__/
+│   └── search/
+│       ├── SearchResultsView.vue
+│       └── __tests__/
+└── shared/
+    ├── components/   # ShowCard, HorizontalScroll, SkeletonLoader
+    ├── services/
+    └── types/
+```
+
+The goal is that everything related to a feature lives in one place — you open one folder and see the full picture. Components only move to `shared/` when a second feature genuinely needs them.
+
+### Pagination Consistency
+
+The dashboard uses page-by-page navigation while the genre view uses infinite scroll. This was intentional — it served as an experiment to compare both patterns in the same codebase. In a production app you would pick one approach and apply it consistently. Mixing pagination styles adds cognitive overhead for users and makes shared loading state logic harder to centralise.
+
+### State and Caching
+
+The Pinia store holds only the current page of shows with no cache. Navigating back to a previously visited page triggers a fresh network request. A normalised store keyed by show ID, or a query cache layer, would eliminate redundant fetches as the app grows.
+
+### Error Handling
+
+Each view currently manages its own error state with a local `try/catch`. At scale this would be extracted into a shared error boundary component so error UI and retry behaviour are consistent across the app.
+
+---
+
 ## Testing
 
-Unit tests are in `src/stores/__tests__/`. They cover the Pinia store logic: genre grouping, rating sorting, multi-genre shows, and pagination state.
+Unit tests cover the Pinia store, all API service functions, and all presentational and interactive components. Tests are colocated with their source in `__tests__` folders and mock external dependencies (fetch, Vue Router) at the module boundary.
 
 ```bash
 npm run test:run

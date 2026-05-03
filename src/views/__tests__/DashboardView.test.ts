@@ -72,7 +72,7 @@ describe('DashboardView', () => {
         const wrapper = await mountView()
         const store = useShowStore()
         store.loading = true
-
+        // genreGroups is empty by default
         await wrapper.vm.$nextTick()
         expect(wrapper.find('.skeleton-stub').exists()).toBe(true)
         wrapper.unmount()
@@ -114,7 +114,7 @@ describe('DashboardView', () => {
             },
         ]
         await wrapper.vm.$nextTick()
-        
+        // Drama and Thriller → 2 genre groups
         expect(wrapper.findAll('.genre-row-stub')).toHaveLength(2)
         wrapper.unmount()
     })
@@ -153,9 +153,8 @@ describe('DashboardView', () => {
         store.loading = false
         store.shows = [makeGroup('Drama').shows[0]]
         await wrapper.vm.$nextTick()
-        const buttons = wrapper.findAll('.dashboard__page-btn')
-        const prev = buttons.find((b) => b.text().includes('Previous'))
-        expect(prev?.attributes('disabled')).toBeDefined()
+        const prev = wrapper.find('button[aria-label="Previous page"]')
+        expect(prev.attributes('disabled')).toBeDefined()
         wrapper.unmount()
     })
 
@@ -166,9 +165,8 @@ describe('DashboardView', () => {
         store.hasMore = false
         store.shows = [makeGroup('Drama').shows[0]]
         await wrapper.vm.$nextTick()
-        const buttons = wrapper.findAll('.dashboard__page-btn')
-        const next = buttons.find((b) => b.text().includes('Next'))
-        expect(next?.attributes('disabled')).toBeDefined()
+        const next = wrapper.find('button[aria-label="Next page"]')
+        expect(next.attributes('disabled')).toBeDefined()
         wrapper.unmount()
     })
 

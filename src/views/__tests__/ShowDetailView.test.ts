@@ -37,20 +37,20 @@ vi.mock('@/components/HorizontalScroll.vue', () => ({
 function makeShowDetail(overrides: Partial<ShowDetail> = {}): ShowDetail {
     return {
         id: 42,
-        name: 'Breaking Bad',
-        genres: ['Drama', 'Crime'],
+        name: 'Rick and Morty',
+        genres: ['Animation', 'Comedy'],
         image: {
             medium: 'https://example.com/med.jpg',
             original: 'https://example.com/orig.jpg',
         },
-        summary: '<p>A teacher becomes a drug lord.</p>',
-        rating: { average: 9.5 },
-        premiered: '2008-01-20',
-        ended: '2013-09-29',
+        summary: '<p>A genius scientist and his grandson go on wild adventures.</p>',
+        rating: { average: 9.2 },
+        premiered: '2013-12-02',
+        ended: null,
         language: 'English',
-        status: 'Ended',
-        officialSite: 'https://amc.com/breaking-bad',
-        network: { name: 'AMC', country: { name: 'United States' } },
+        status: 'Running',
+        officialSite: 'https://adultswim.com/rick-and-morty',
+        network: { name: 'Adult Swim', country: { name: 'United States' } },
         schedule: { time: '22:00', days: ['Sunday'] },
         runtime: 47,
         _embedded: {
@@ -58,10 +58,10 @@ function makeShowDetail(overrides: Partial<ShowDetail> = {}): ShowDetail {
                 {
                     person: {
                         id: 1,
-                        name: 'Bryan Cranston',
-                        image: { medium: 'https://example.com/bc.jpg', original: '' },
+                        name: 'Justin Roiland',
+                        image: { medium: 'https://example.com/jr.jpg', original: '' },
                     },
-                    character: { id: 10, name: 'Walter White', image: null },
+                    character: { id: 10, name: 'Rick Sanchez', image: null },
                 },
             ],
             seasons: [
@@ -134,7 +134,7 @@ describe('ShowDetailView', () => {
         vi.mocked(api.fetchSeasonEpisodes).mockResolvedValue([])
         const wrapper = await mountWithId(42)
         await flushPromises()
-        expect(wrapper.find('.detail__title').text()).toBe('Breaking Bad')
+        expect(wrapper.find('.detail__title').text()).toBe('Rick and Morty')
         wrapper.unmount()
     })
 
@@ -143,7 +143,7 @@ describe('ShowDetailView', () => {
         vi.mocked(api.fetchSeasonEpisodes).mockResolvedValue([])
         const wrapper = await mountWithId(42)
         await flushPromises()
-        expect(wrapper.find('.detail__rating').text()).toContain('9.5')
+        expect(wrapper.find('.detail__rating').text()).toContain('9.2')
         wrapper.unmount()
     })
 
@@ -164,7 +164,7 @@ describe('ShowDetailView', () => {
         const wrapper = await mountWithId(42)
         await flushPromises()
         expect(wrapper.find('.cast-card').exists()).toBe(true)
-        expect(wrapper.find('.cast-card__name').text()).toBe('Bryan Cranston')
+        expect(wrapper.find('.cast-card__name').text()).toBe('Justin Roiland')
         wrapper.unmount()
     })
 
@@ -201,7 +201,7 @@ describe('ShowDetailView', () => {
         await flushPromises()
         const link = wrapper.find('.detail__link')
         expect(link.exists()).toBe(true)
-        expect(link.attributes('href')).toBe('https://amc.com/breaking-bad')
+        expect(link.attributes('href')).toBe('https://adultswim.com/rick-and-morty')
         wrapper.unmount()
     })
 

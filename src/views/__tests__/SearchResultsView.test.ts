@@ -19,15 +19,15 @@ vi.mock('@/components/SkeletonLoader.vue', () => ({
 function makeShow(overrides: Partial<Show> = {}): Show {
     return {
         id: 1,
-        name: 'Breaking Bad',
-        genres: ['Drama', 'Crime'],
+        name: 'Rick and Morty',
+        genres: ['Animation', 'Comedy'],
         image: null,
         summary: null,
-        rating: { average: 9.5 },
-        premiered: '2008-01-20',
-        ended: '2013-09-29',
+        rating: { average: 9.2 },
+        premiered: '2013-12-02',
+        ended: null,
         language: 'English',
-        status: 'Ended',
+        status: 'Running',
         officialSite: null,
         network: null,
         schedule: { time: '', days: [] },
@@ -62,8 +62,8 @@ describe('SearchResultsView', () => {
 
     it('renders show cards after a successful search', async () => {
         vi.mocked(api.searchShows).mockResolvedValue([
-            { score: 1, show: makeShow({ id: 1, name: 'Breaking Bad' }) },
-            { score: 0.9, show: makeShow({ id: 2, name: 'Better Call Saul' }) },
+            { score: 1, show: makeShow({ id: 1, name: 'Rick and Morty' }) },
+            { score: 0.9, show: makeShow({ id: 2, name: 'Solar Opposites' }) },
         ])
         const wrapper = await mountWithQuery('breaking')
         await flushPromises()
