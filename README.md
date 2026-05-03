@@ -1,5 +1,7 @@
 # ShowVault — TV Shows Dashboard
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cf271c51-1ae0-49f7-8c8a-717cade049fe/deploy-status)](https://app.netlify.com/projects/showvault-tv/deploys)
+
 A TV show discovery app built with Vue 3 and TypeScript. It uses the free [TVMaze API](https://www.tvmaze.com/api) to display shows grouped by genre, allow searching, and show detailed information per show.
 
 ---
