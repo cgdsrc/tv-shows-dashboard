@@ -164,7 +164,6 @@ onBeforeUnmount(() => {
   transform: rotate(180deg);
 }
 
-/* Dropdown list */
 .cselect__list {
   position: absolute;
   top: calc(100% + 6px);
@@ -221,7 +220,6 @@ onBeforeUnmount(() => {
   cursor: default;
 }
 
-/* Animation */
 .dropdown-enter-active,
 .dropdown-leave-active {
   transition:

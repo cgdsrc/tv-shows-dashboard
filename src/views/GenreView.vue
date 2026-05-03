@@ -163,7 +163,6 @@ onBeforeUnmount(() => {
         <ShowCard v-for="show in shows" :key="show.id" :show="show" />
       </div>
 
-      <!-- Infinite scroll sentinel -->
       <div ref="sentinel" class="genre-view__sentinel">
         <div v-if="loadError" class="genre-view__error">
           <p>Failed to load more shows.</p>
@@ -192,11 +191,10 @@ onBeforeUnmount(() => {
   padding: var(--space-lg) var(--page-padding) var(--space-3xl);
   max-width: var(--content-max-width);
   margin: 0 auto;
-  /* offset so content isn't under sticky bar */
+
   padding-top: calc(var(--space-lg) + 48px);
 }
 
-/* Sticky genre bar */
 .genre-view__sticky {
   position: fixed;
   top: var(--header-height);

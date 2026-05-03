@@ -65,15 +65,12 @@ watch(results, (r) => {
       </p>
     </div>
 
-    <!-- Loading -->
     <SkeletonLoader v-if="loading" type="card-grid" />
 
-    <!-- Error -->
     <div v-else-if="error" class="search-view__empty">
       <p>{{ error }}</p>
     </div>
 
-    <!-- No results -->
     <div
       v-else-if="query && !loading && results.length === 0"
       class="search-view__empty"
@@ -81,7 +78,6 @@ watch(results, (r) => {
       <p>No results found for "{{ query }}"</p>
     </div>
 
-    <!-- Results grid -->
     <div v-else class="search-view__grid">
       <ShowCard
         v-for="result in results"

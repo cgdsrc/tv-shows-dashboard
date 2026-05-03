@@ -24,7 +24,7 @@ function stripHtml(html: string | null) {
       <div class="episode-card__gradient"></div>
       <div class="episode-card__overlay">
         <span class="episode-card__tag">
-          S{{ episode.season }}: E{{ episode.number ?? "?" }}
+          S{{ episode.season }}: E{{ episode.number }}
         </span>
         <h3 class="episode-card__title">{{ episode.name }}</h3>
         <span v-if="episode.airdate" class="episode-card__date">
@@ -37,8 +37,7 @@ function stripHtml(html: string | null) {
           }}
         </span>
         <p v-if="episode.summary" class="episode-card__summary">
-          {{ stripHtml(episode.summary).slice(0, 100)
-          }}{{ stripHtml(episode.summary).length > 100 ? "..." : "" }}
+          {{ stripHtml(episode.summary).slice(0, 100) }}
         </p>
       </div>
     </div>

@@ -34,9 +34,9 @@ watch(
 
 function clear() {
   query.value = "";
-  if (route.name === "search") {
-    router.push({ name: "dashboard" });
-  }
+    if (route.name === "search") {
+      router.push({ name: "dashboard" });
+    }
 }
 </script>
 

@@ -520,7 +520,6 @@ function yearRange(show: ShowDetail) {
   padding: var(--space-sm) var(--page-padding) var(--space-lg);
 }
 
-/* Related shows */
 .detail__related-list {
   gap: var(--space-md);
   padding: var(--space-sm) var(--page-padding) var(--space-xl);

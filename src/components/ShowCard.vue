@@ -26,7 +26,7 @@ function yearFromDate(date: string | null) {
       <div v-else class="show-card__no-image">
         <span>{{ show.name.charAt(0) }}</span>
       </div>
-      <!-- Hover info overlay -->
+
       <div class="show-card__info">
         <h3 class="show-card__info-title">{{ show.name }}</h3>
         <div class="show-card__info-meta">

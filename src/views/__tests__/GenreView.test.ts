@@ -81,7 +81,7 @@ describe('GenreView', () => {
             shows: [
                 makeShow({ id: 1, genres: ['Drama'] }),
                 makeShow({ id: 2, genres: ['Drama'] }),
-                makeShow({ id: 3, genres: ['Comedy'] }), // should be filtered out
+                makeShow({ id: 3, genres: ['Comedy'] }), 
             ],
             hasMore: false,
         })

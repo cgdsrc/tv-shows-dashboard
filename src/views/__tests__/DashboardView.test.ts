@@ -6,7 +6,6 @@ import DashboardView from '@/views/DashboardView.vue'
 import { useShowStore } from '@/stores/showStore'
 import type { GenreGroup } from '@/types/show'
 
-// Stub child components so tests stay focused on the view logic
 vi.mock('@/components/GenreRow.vue', () => ({
     default: { template: '<div class="genre-row-stub" />', props: ['genre', 'shows'] },
 }))
@@ -73,7 +72,7 @@ describe('DashboardView', () => {
         const wrapper = await mountView()
         const store = useShowStore()
         store.loading = true
-        // genreGroups is empty by default
+
         await wrapper.vm.$nextTick()
         expect(wrapper.find('.skeleton-stub').exists()).toBe(true)
         wrapper.unmount()
@@ -115,7 +114,7 @@ describe('DashboardView', () => {
             },
         ]
         await wrapper.vm.$nextTick()
-        // Drama and Thriller → 2 genre groups
+        
         expect(wrapper.findAll('.genre-row-stub')).toHaveLength(2)
         wrapper.unmount()
     })
